@@ -1,0 +1,24 @@
+.notices,
+.products {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.notices td {
+  background-color: transparent;
+  color: white;
+}
+
+.notices .red {
+  color: white;
+  background-color: red;
+  border-radius: 4px;
+}
+
+.notices .green {
+  color: white;
+  background-color: green;
+  border-radius: 4px;
+}

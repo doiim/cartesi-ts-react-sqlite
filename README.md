@@ -1,46 +1,64 @@
-# Getting Started with Create React App
+# Cartesi Typescript React SQLite
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The project is a React application built with Create React App and utilizes TypeScript for type safety. It is managed using npm as the package manager. The goal of the project is to create a template that streamlines the process of kickstarting new projects. The template incorporates the latest version of React and integrates with Ethers, allowing for seamless interaction with the underlying blockchain. For testing purposes, a pre-deployed demo on the Sepolia Network is available for users to explore before starting their own development.
 
-## Available Scripts
+<!-- [https://blabla](Live Demo) -->
 
-In the project directory, you can run:
+## How this project is structure
 
-### `npm start`
+![Cartesi project structure](https://github.com/doiim/cartesi-react-bootstrap/assets/13040410/2ab19829-997b-4964-82ca-b038f3fe2dd2)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Front End [(github)](asdasdasdas)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+A `Create React App` template that runs a `Typescript` supported app with `CSS Modules`. This app uses `Apollo Client` to update `Notices` from backend services and normal requests to call `Inspect` endpoint for fetch current state of the database. To call `Advance` inputs, the app uses `Ethers V5` to communicate with Backend EVM.
 
-### `npm test`
+### Back End [(github)](asdasdasdas)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+A `Sunodo` template machine that runs a `Typescript` node service along with `viem` to convert values from/to Hex strings. We could have switched to `Ethers` but the idea was to reduce the amount to code, and the `Sunodo` template used already have support to `viem`. The database runs `SQLite` with WASM support due to the nature of the Risc-V Node has no native support to `SQLite` bindings.
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In case you do not reach here via create-react-app, you will be required to install the dependencies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```sh
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Before run this app it would be required to run the backend service for it. To run a local backend service for this app it is required [Sunodo](https://docs.sunodo.io/guide/introduction/what-is-sunodo).
 
-### `npm run eject`
+1. [Install Sunodo](https://docs.sunodo.io/guide/introduction/installing)
+2. Clone the backend repo and install it
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```sh
+git clone https://github.com/path-to-repo.git
+cd path
+sunodo build
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Running Locally
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+To run a local back end service, in a separate terminal window, just access the backend folder and run:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```sh
+sunodo run
+```
+
+Runs the front end app in the development mode.
+
+```sh
+npm start
+```
+
+This will run an [anvil](https://book.getfoundry.sh/reference/anvil/) node as a local blockchain, and the GraphQL service and Inspect Service.
 
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is meant to run on [Cartesi Machine](https://docs.cartesi.io/), the tool used to run and deploy the backend to public networks was [Sunodo](https://docs.sunodo.io/guide/introduction/what-is-sunodo).
+
+This project is based on the following repositories from Cartesi team:
+
+- [Sunodo Typescript template project](https://github.com/sunodo/sunodo-templates/tree/main/typescript)
+- [Backend SQLite Image](https://github.com/cartesi/rollups-examples/tree/main/sqlite)
+- [Front-end Echo Example](https://github.com/cartesi/rollups-examples/tree/main/frontend-echo)

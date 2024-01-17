@@ -1,0 +1,18 @@
+.formContainer {
+  max-width: 500px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+}
+
+.formContainer input[type="text"] {
+  /* Add yousolidme input fields here */
+}
+
+.formContainer input[type="submit"] {
+  /* Add your styles for the submit button here */
+}
