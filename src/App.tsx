@@ -1,5 +1,8 @@
-import React from 'react';
-import { Signer } from 'ethers';
+import React, { useEffect, useState } from 'react';
+import { Signer, utils } from 'ethers';
+
+import { useQuery, gql } from "@apollo/client";
+
 import LogoCartesi from './components/logos/LogoCartesi';
 import LogoDoiim from './components/logos/LogoDoiim';
 
@@ -10,11 +13,59 @@ import ListNotices from './components/ListNotices';
 
 import './App.css';
 
+// GraphQL query to retrieve notices given a cursor
+const GET_NOTICES = gql`
+query GetNotices($cursor: String) {
+    notices(first: 10, after: $cursor) {
+        totalCount
+        pageInfo {
+            hasNextPage
+            endCursor
+        }
+        edges {
+            node {
+                index
+                payload
+            }
+        }
+    }
+}`;
+
 const App = () => {
 
   const [address, setAddress] = React.useState<string | null>(null);
   const [signer, setSigner] = React.useState<Signer | null>(null);
-  const [notices, setNotices] = React.useState<number>(0);
+
+  const [notices, setNotices] = useState([]);
+  const [cursor, setCursor] = useState(null);
+
+  // Retrieve notices every 500 ms
+  const { loading, error, data } = useQuery(GET_NOTICES, {
+    variables: { cursor },
+    pollInterval: 500,
+  });
+
+  useEffect(() => {
+    // Check query result
+    const length = data?.notices?.edges?.length;
+    if (length) {
+      // Update cursor so that next GraphQL poll retrieves only newer data
+      setCursor(data.notices.pageInfo.endCursor);
+    }
+    // Render new echoes
+    const newNotices = data?.notices?.edges?.map(({ node }: { node: any }) => {
+      // Render echo from notice
+      const entry = JSON.parse(utils.toUtf8String(node.payload));
+      console.log(`Detected new entry : ${JSON.stringify(entry)} `);
+      return entry;
+    });
+    if (newNotices) {
+      // Concat new echoes with previous ones
+      setNotices((prev) => {
+        return prev.concat(newNotices);
+      });
+    }
+  }, [data]);
 
   const onSignerChange = async (s: Signer | null) => {
     setSigner(s);
@@ -25,28 +76,21 @@ const App = () => {
     }
   }
 
-  const onSendInput = async (input: string) => {
-    console.log(input);
-  }
-
-  const onNewNotice = async (length: number) => {
-    setNotices(length);
-  }
-
   return (
     <div className="app">
       <WalletConnector onSignerChange={onSignerChange} />
       <header className="header">
         <h1>Cartesi + React + SQLite</h1>
         <p>This project is designed to streamline the process of kickstarting new projects. It incorporates React + Typescript, integrates with Ethers and communicates to a SQLite database running on Cartesi Machine.</p>
+        <p>Connect your wallet to be able to Add/Remove products from database.</p>
       </header>
       <main>
         <div>Connected Wallet: {address}</div>
         <CreateProductForm signer={signer}></CreateProductForm>
         <div className="holder">
-          <div className='horizontal'>
-            <ListProducts signer={signer} noticesLength={notices}></ListProducts>
-            <ListNotices onNewNotice={onNewNotice}></ListNotices>
+          <div className='flex-row'>
+            <ListProducts signer={signer} noticesLength={notices.length}></ListProducts>
+            <ListNotices notices={notices}></ListNotices>
           </div>
         </div>
       </main>

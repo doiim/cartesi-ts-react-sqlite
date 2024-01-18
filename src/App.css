@@ -42,7 +42,7 @@ main {
   margin: 2rem;
 }
 
-.horizontal {
+.flex-row {
   width: 100%;
   max-width: 1140px;
   display: flex;

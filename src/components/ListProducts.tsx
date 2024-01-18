@@ -3,6 +3,7 @@ import { InputBox__factory } from "@cartesi/rollups";
 import { Signer, utils } from 'ethers';
 
 import styles from './Lists.module.css';
+import { Product } from '../interfaces';
 
 
 // OBS: change Echo DApp address as appropriate
@@ -11,12 +12,7 @@ const DAPP_ADDRESS = process.env.REACT_APP_DAPP_ADDRESS;
 const INPUTBOX_ADDRESS = process.env.REACT_APP_INPUTBOX_ADDRESS;
 const QUERY_INSPECT = process.env.REACT_APP_URL_QUERY_INSPECT;
 
-type Product = {
-    id: string;
-    name: string;
-};
-
-type ListProductsProps = {
+export type ListProductsProps = {
     signer: Signer | null;
     noticesLength: number;
 };
