@@ -28,6 +28,11 @@ const ListProducts: React.FC<ListProductsProps> = ({ notices }) => {
                             {p.action === 'delete' ? <td className={styles.red}>{p.action}</td> : null}
                         </tr>
                     ))}
+                    {notices.length === 0 ? (
+                        <tr>
+                            <td className={styles.faded} colSpan={3}>Notices list empty</td>
+                        </tr>
+                    ) : null}
                 </tbody>
             </table>
         </div>

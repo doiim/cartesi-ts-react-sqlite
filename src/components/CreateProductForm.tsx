@@ -24,7 +24,7 @@ const CreateProduct: React.FC<ListTablesProps> = ({ signer }) => {
             if (!DAPP_ADDRESS) throw new Error('DAPP_ADDRESS not set');
             if (!INPUTBOX_ADDRESS) throw new Error('INPUTBOX_ADDRESS not set');
             if (!signer) throw new Error('No Signer addigned to the wallet');
-            setStatus('Sending');
+            setStatus('Sending ...');
 
             // Instantiate the InputBox contract
             const inputBox = InputBox__factory.connect(
@@ -37,14 +37,15 @@ const CreateProduct: React.FC<ListTablesProps> = ({ signer }) => {
 
             // Send the transaction
             const tx = await inputBox.addInput(DAPP_ADDRESS, inputBytes);
-            setStatus('Sent');
+            setStatus('Sent!');
             // Wait for confirmation
             console.log(`waiting for confirmation... ${tx.hash}`);
-            const receipt = await tx.wait(2);
+            const receipt = await tx.wait(1);
             console.log(`tx confirmed: ${receipt}`);
             setStatus('');
         } catch (error: any) {
             console.error(error.message)
+            setStatus('');
         }
     };
 
@@ -53,25 +54,25 @@ const CreateProduct: React.FC<ListTablesProps> = ({ signer }) => {
             <p><b>Insert New Product</b></p>
             <form className={styles.formContainer} onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="id">ID:</label>
                     <input
                         type="text"
                         id="id"
+                        placeholder='Product ID'
                         value={id}
                         onChange={(e) => setId(e.target.value)}
                     />
                 </div>
                 <div>
-                    <label htmlFor="name">Name:</label>
                     <input
                         type="text"
                         id="name"
+                        placeholder='Product Name'
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
                 </div>
                 <button type="submit" disabled={status !== ''} onClick={handleSubmit}>
-                    {status === 'Sending' ? 'Sending...' : status === 'Sent' ? 'Sent!' : 'Submit'}
+                    {status !== '' ? status : 'Submit'}
                 </button>
             </form>
         </div >

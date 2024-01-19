@@ -42,7 +42,7 @@ const ListProducts: React.FC<ListProductsProps> = ({ signer, noticesLength }) =>
             if (!DAPP_ADDRESS) throw new Error('DAPP_ADDRESS not set');
             if (!INPUTBOX_ADDRESS) throw new Error('INPUTBOX_ADDRESS not set');
             if (!signer) throw new Error('No Signer addigned to the wallet');
-            setStatus('Sending');
+            setStatus(`Removing Product ${p.name}...`);
 
             // Instantiate the InputBox contract
             const inputBox = InputBox__factory.connect(
@@ -55,14 +55,15 @@ const ListProducts: React.FC<ListProductsProps> = ({ signer, noticesLength }) =>
 
             // Send the transaction
             const tx = await inputBox.addInput(DAPP_ADDRESS, inputBytes);
-            setStatus('Sent');
+            setStatus('Request sent!');
             // Wait for confirmation
             console.log(`waiting for confirmation... ${tx.hash}`);
-            const receipt = await tx.wait(2);
+            const receipt = await tx.wait(1);
             console.log(`tx confirmed: ${receipt}`);
             setStatus('');
         } catch (error: any) {
             console.error(error.message)
+            setStatus('');
         }
     };
 
@@ -78,7 +79,7 @@ const ListProducts: React.FC<ListProductsProps> = ({ signer, noticesLength }) =>
                     </tr>
                 </thead>
                 <tbody>
-                    {products.map((p: Product) => (
+                    {status === '' && products.map((p: Product) => (
                         <tr key={p.id}>
                             <td>{p.id}</td>
                             <td>{p.name}</td>
@@ -87,6 +88,16 @@ const ListProducts: React.FC<ListProductsProps> = ({ signer, noticesLength }) =>
                             </td>
                         </tr>
                     ))}
+                    {status === '' && products.length === 0 ? (
+                        <tr>
+                            <td className={styles.faded} colSpan={3}>Products list empty</td>
+                        </tr>
+                    ) : null}
+                    {status !== '' ? (
+                        <tr>
+                            <td className={styles.faded} colSpan={3}>{status}</td>
+                        </tr>
+                    ) : null}
                 </tbody>
             </table>
         </div>

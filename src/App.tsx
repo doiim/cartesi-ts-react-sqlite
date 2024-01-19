@@ -5,7 +5,6 @@ import { useQuery, gql } from "@apollo/client";
 
 import LogoCartesi from './components/logos/LogoCartesi';
 import LogoDoiim from './components/logos/LogoDoiim';
-
 import WalletConnector from './components/WalletConnector';
 import CreateProductForm from './components/CreateProductForm';
 import ListProducts from './components/ListProducts';
@@ -33,9 +32,7 @@ query GetNotices($cursor: String) {
 
 const App = () => {
 
-  const [address, setAddress] = React.useState<string | null>(null);
   const [signer, setSigner] = React.useState<Signer | null>(null);
-
   const [notices, setNotices] = useState([]);
   const [cursor, setCursor] = useState(null);
 
@@ -69,11 +66,6 @@ const App = () => {
 
   const onSignerChange = async (s: Signer | null) => {
     setSigner(s);
-    if (s) {
-      setAddress(await s.getAddress());
-    } else {
-      setAddress(null);
-    }
   }
 
   return (
@@ -85,7 +77,6 @@ const App = () => {
         <p>Connect your wallet to be able to Add/Remove products from database.</p>
       </header>
       <main>
-        <div>Connected Wallet: {address}</div>
         <CreateProductForm signer={signer}></CreateProductForm>
         <div className="holder">
           <div className='flex-row'>

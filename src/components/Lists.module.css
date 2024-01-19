@@ -13,12 +13,18 @@
 
 .notices .red {
   color: white;
-  background-color: red;
+  background-color: #ff000066;
   border-radius: 4px;
 }
 
 .notices .green {
   color: white;
-  background-color: green;
+  background-color: #00ff0066;
   border-radius: 4px;
+}
+
+.notices .faded,
+.products .faded {
+  color: grey;
+  padding: 10px 0px;
 }

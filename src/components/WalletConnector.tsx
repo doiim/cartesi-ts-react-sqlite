@@ -39,7 +39,7 @@ const WalletConnector: React.FC<WalletConnectorProps> = ({ onSignerChange }) => 
     }, [])
 
     return (
-        <div className={styles.container}>
+        <div className={styles.fixed}>
             {connectedWallet ? (
                 <>
                     {connectedWallet ?
