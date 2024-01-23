@@ -27,7 +27,6 @@ const ListProducts: React.FC<ListProductsProps> = ({ signer, noticesLength }) =>
                 if (!QUERY_INSPECT) throw new Error('QUERY_INSPECT not set');
                 const response = await fetch(`${QUERY_INSPECT}/products`);
                 const data = await response.json();
-                console.log(data);
                 const list = JSON.parse(utils.toUtf8String(data.reports[0].payload))
                 setProducts(list);
             } catch (error: any) {
