@@ -14,6 +14,7 @@ const WalletConnector: React.FC<WalletConnectorProps> = ({ onSignerChange }) => 
     const connectWallet = useCallback(async () => {
         try {
             // Connect wallet in Metamask
+            (window as any).ethereum.enable();
             const provider = new providers.Web3Provider((window as any).ethereum);
             const signer = await provider.getSigner();
 
