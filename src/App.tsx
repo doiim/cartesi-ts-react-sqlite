@@ -39,7 +39,7 @@ const App = () => {
   // Retrieve notices every 500 ms
   const { data } = useQuery(GET_NOTICES, {
     variables: { cursor },
-    pollInterval: 500,
+    pollInterval: 2000,
   });
 
   useEffect(() => {
