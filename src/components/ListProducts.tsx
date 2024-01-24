@@ -7,10 +7,10 @@ import { Product } from '../interfaces';
 
 
 // OBS: change Echo DApp address as appropriate
-const DAPP_ADDRESS = process.env.REACT_APP_DAPP_ADDRESS;
+const DAPP_ADDRESS = process.env.REACT_APP_DAPP_ADDRESS || '0x70ac08179605AF2D9e75782b8DEcDD3c22aA4D0C';
 // Standard configuration for local development environment
-const INPUTBOX_ADDRESS = process.env.REACT_APP_INPUTBOX_ADDRESS;
-const QUERY_INSPECT = process.env.REACT_APP_URL_QUERY_INSPECT;
+const INPUTBOX_ADDRESS = process.env.REACT_APP_INPUTBOX_ADDRESS || '0x59b22D57D4f067708AB0c00552767405926dc768';
+const QUERY_INSPECT = process.env.REACT_APP_URL_QUERY_INSPECT || "http://localhost:8080/inspect";
 
 export type ListProductsProps = {
     signer: Signer | null;

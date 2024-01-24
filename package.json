@@ -40,8 +40,5 @@
       "last 2 firefox version",
       "last 2 safari version"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^6.1.1"
   }
 }

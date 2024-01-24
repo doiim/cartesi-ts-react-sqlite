@@ -38,28 +38,6 @@ Runs the front end app in the development mode.
 npm start
 ```
 
-## Deploy for Production
-
-1. Change the property `homepage` on file `package.json` for build phase create path for the content according to the hosted page.
-
-```sh
- "homepage": "https://doiim.github.io/cartesi-ts-react-sqlite",
-```
-
-2. Set Environment variables on your hosting machine according to the validator backend. you can base your variables on `.env.example` files
-
-3. Run build command:
-
-```sh
-npm run build
-```
-
-4. (optional) In case you are using Github Pages. Run deploy command.
-
-```sh
-npm run deploy
-```
-
 ## How this project is structure
 
 ![Cartesi project structure](https://github.com/doiim/cartesi-react-bootstrap/assets/13040410/2ab19829-997b-4964-82ca-b038f3fe2dd2)
