@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/cartesi-ts-react-sqlite/static/css/main.d3d56b84.css",
-    "main.js": "/cartesi-ts-react-sqlite/static/js/main.2ea45fe2.js",
+    "main.js": "/cartesi-ts-react-sqlite/static/js/main.e61603e7.js",
     "index.html": "/cartesi-ts-react-sqlite/index.html",
     "main.d3d56b84.css.map": "/cartesi-ts-react-sqlite/static/css/main.d3d56b84.css.map",
-    "main.2ea45fe2.js.map": "/cartesi-ts-react-sqlite/static/js/main.2ea45fe2.js.map"
+    "main.e61603e7.js.map": "/cartesi-ts-react-sqlite/static/js/main.e61603e7.js.map"
   },
   "entrypoints": [
     "static/css/main.d3d56b84.css",
-    "static/js/main.2ea45fe2.js"
+    "static/js/main.e61603e7.js"
   ]
 }
